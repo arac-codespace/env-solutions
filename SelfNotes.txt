@@ -315,4 +315,12 @@ If you do want to add it to the project, just save the bootstrap library to css/
   
 
 Btw, no need to explicitely write the directory because the static tag will use the dirs stated in the settings.py file.
+---
 
+About reactjs.
+
+Oh boy, where do I even begin?  Just visit: https://github.com/mbrochh/django-reactjs-boilerplate/tree/master
+
+Visit the following site if you're having same origin access issues : https://github.com/gaearon/react-hot-loader/issues/56
+
+react-router implementation is not covered in the above tutorial.  That's something I'll have to get my teeth in once I have a semblance of understanding as to how react works...
