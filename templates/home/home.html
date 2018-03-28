@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
 
 {% load static %}
 
@@ -79,6 +80,10 @@
 		      			{% include 'home/_home-project.html' %}
 		      		{% endfor %}  
 		      </div>
+		      <div id="HomeProjects" class="insert-projects row justify-content-around">
+				{% render_bundle 'vendors' %}
+				{% render_bundle 'Home' %}
+		      </div>		      
 		    </div>
 		  </div>			
 		</div>
