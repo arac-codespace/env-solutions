@@ -1,0 +1,318 @@
+NOOBY notes - Learning as I go...
+
+About starting a project.
+
+First, create a virtual environment.  This works sort of like a gem file in that Python will compartmentalize plugins/dependencies and use it for one specific project.
+
+pip install virtualenv
+virtualenv . # create the env at current dir
+
+To activate the virtual env, do: ./Scripts/activate
+To deactivate, just type deactiate...
+Make sure you're in the correct dir.
+
+After creating the virtual environment, use pip to install django: 
+pip install django==version
+
+I'm using 2.0.3 which is the latest as of 3/19/18
+
+
+Create a src folder inside the vm folder. and then create a new django project doing:
+django-admin.py startproject *name*
+
+Note that you CAN start multiple projects in the same env folder, though it may not be wise to do so.
+
+The folder structure should look like...
+*virtuaenv*/src/ - django stuff -
+
+Run server: python manage.py runserver
+Migrate: python manage.py makemigrations || ... ... migrate
+Shell: python manage.py shell
+Create app: python manage.py startapp *appname* 
+
+--
+
+About the django shell.
+You can use a ModelForm to validate information passed through the shell or a script. 
+
+IE:
+data = {'title':'hello','industry':'edu','location':'Ponce','description':'heh','client':'me', 'slug':'huh'}
+project = Project()
+form = ProjectForm(data, instance = project)
+if form.is_valid():
+    form.save()
+
+Passing info through the ModelForm will use the associated field validations that instantiating a simple model wouldn't.  This way, there's no need to mess with the models' save or validation methods when populating data and whatnot.
+--
+
+About validation.
+
+You can create validations specific to a ModelForm or you can create validations in the model file that will apply to ALL ModelForms.
+
+For 'global' field validations, you can do something like...
+
+def validate_no_nums(value):
+    if value.isdigit():
+        raise ValidationError(
+            _('%(value)s has a number'),
+            params={'value': value},
+        )
+
+title = models.CharField(max_length=120, validators=[validate_no_nums])
+
+This is a simple example given here: https://docs.djangoproject.com/en/2.0/ref/validators/
+
+OR in forms.py...
+
+from django import forms
+
+from .models import Project
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'industry', 'location',
+                  'client', 'description', 'slug']
+
+        def clean_title(self):
+
+
+        		// .cleaned_data will clean the data
+        		// first using built-in validators
+
+            title = self.cleaned_data.get('title')
+
+            // now we'll just add another validator...
+
+            if title.isdigit():
+            		raise forms.ValidationError("Mustn't be a number")
+
+            return title
+
+The above validation will only apply to ProjectForm.
+
+
+You can also add Model validation, though you'll have to of course handle the error.
+This is done using a feature called signals.
+
+// https://zindilis.com/blog/2017/05/04/django-backend-validation-of-choices.html
+IE: 
+
+from django.db import models
+
+
+class Artist(models.Model):
+
+    TYPE_CHOICES = (
+        ('Person', 'Person'),
+        ('Group', 'Group'),
+        ('Other', 'Other'),)
+
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+
+
+models.signals.pre_save.connect(validate_artist_name_choice, sender=Artist)
+
+def validate_artist_name_choice(sender, instance, **kwargs):
+    valid_types = [t[0] for t in sender.TYPE_CHOICES]
+    if instance.type not in valid_types:
+        from django.core.exceptions import ValidationError
+        raise ValidationError(
+            'Artist Type "{}" is not one of the permitted values: {}'.format(
+                instance.type,
+               ', '.join(valid_types)))
+
+
+About Migrations.
+
+I found a unique peculiarity about functions defined outside a model and referenced inside said model (IE: the above example about 'global' field validation).
+
+If the function is not within the scope of the model, the migration file will of course not include the function.  This means that if the function is not defined in the same file (ie: removed bc it's no longer needed) or imported from somewhere the application will throw an error.
+
+To fix this, you need to squash the migration or move the function definition to the problematic migration file.
+
+
+About Views.py.
+
+It's basically the controller.  Here we point to the html file we want to render and pass data to the view page to render dynamic content.  Template context var is what the passed arguments is called, and it takes the form of...
+
+from django.shortcuts import render
+
+def home(request):
+  title = "Some Title" # view function var
+  context = {
+    "title": title,
+  }
+
+  return render(request,"home.html", context)
+
+context title btw, is just an arbitrary name.  You'll use the same var name in the html view like so.
+
+<h1>{{ title }}</h1> # Some Title
+
+Btw, there are some context variables that are being imported by default to the views by the context_processors setting in settings.py.  [{{ user }} and {{ request.user}} are some of the context vars available.
+
+Btw, you can import forms and render them using context vars.  You do have to write out certain html elements and the form csrf token for validating from submission since it's not fully generated by django ala Rails.  
+
+
+Much like controllers in rails, here's where you can save a form that has been validated, and the code is included in the example below...
+
+Also, note how we can use our context vars...
+
+# app/views.py
+
+...
+from .forms import SomethingForm
+
+
+# Btw, the reason we use request.POST or None is bc request.POST is
+# where the info is stored and None is used because SomethingForm will
+# run the validators on refresh.  So if the forms are empty when reaching
+# the view page, the view will display a validation error
+
+
+form = SomethingForm(request.POST or None) #() will instantiate object
+
+title = 'Hello'
+context = {
+	'title' = title,
+	'form' = form
+}
+
+
+if form.is_valid():
+  instance = instance.save(commit = False)
+
+  # Note that validation is running in the if condition so you can
+  # get data from instance.full_name too
+
+  full_name = form.cleaned_data.get("full_name")
+  if not full_name:
+    full_name = "Default Name"
+
+  instance.full_name = full_name
+
+  instance.save()
+  context = {
+  'title' = 'Welcome!'
+  }
+
+return render(request, 'home.html', context)
+...
+
+# templates/home.html
+
+<form method='POST' action='*address*'>
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type='submit' value='Join'/>
+</form>
+
+
+Of course, you don't have to use ModelForm to do forms.  You can do plain old forms that don't require a model to exist.  Of course you won't be able to save the info into the db, but you can do other stuff like perhaps use it for a Contact app.
+
+Look for form widgets btw.
+--
+
+About send email.
+
+Apparently, we can use gmail to receive contact messages from users and it's free.  It's also easy to implement.  Just visit:
+
+https://www.youtube.com/watch?v=bhzasigpf3Q&index=16&list=PLEsfXFp6DpzRcd-q4vR5qAgOZUuz8041S
+https://docs.djangoproject.com/en/2.0/topics/email/
+--
+About static files (JS, CSS, Images).
+
+Managing static files (look at doc)
+https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+Apparently, there are some things to consider when dealing with production environment.  The following is fine for development only.
+
+Look at https://docs.djangoproject.com/en/2.0/howto/static-files/deployment/
+for production considerations.
+
+
+Anyway, first make sure that in settings.py, the string 'django.contrib.staticfiles' is in INSTALLED_APPS.
+In your settings, define STATIC_URL like so:
+
+STATIC_URL = '/static/'
+
+That's where your files will be served at.
+
+Now, you want a static folder in your app.  You can have a single one for the entire project in src, or a folder for each app.  In this example, I'll have a single one at src
+
+my_app/src/static
+
+After creating the folder, you need to define STATICFILES_DIRS in settings...
+
+These are the directories where your static folders are.  
+
+Then define STATIC_ROOT, which is the folder that will collect all the static files pointed at by STATICFILES_DIRS...
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_in_pro", "static"),
+]
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_to_deploy", "static")
+
+Note the os.path.dirname(BASE_DIR)!
+.dirname will return the parent folder of where the file is nested.  So if BASE_DIR originally pointed to where the manage.py file is (src), then the above will point to envSolRoot folder where the virtual env is (in this particular case).
+
+When you're ready to serve the assets, do python manage.py collectstatic
+
+Btw, some prod envs will automatically do this(heroku).
+
+Similarly, we can do something similar with media...
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_to_deploy", "media")
+
+Media's basically used for when things are being uploaded to the app through the database.  Things that can change/ are not -static-. Heh.
+
+Note the lack of 'media_in_pro'.  The direction from which the media is uploaded will be determined by the user.  It'll have nothing to do with the app itself.
+--
+
+About serving static files.
+
+Well, now that the setup has been done it's time to serve them in our url.  Keep in mind though, that the following will be for serving files on our development server only.  Don't do this for production!
+
+Look at:
+https://docs.djangoproject.com/en/2.0/howto/static-files/ -> Serving Static Files During Development
+
+
+Anyway, to setup the urls do...
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.urls import path
+from projects import views
+
+urlpatterns = [
+    path('', views.projects),
+]
+
+if settings.DEBUG:
+  urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+  urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+
+What's happening here is that we're appending those static URLS to the url patterns list.
+
+If condition to not serve static files from those URLS.  Btw,  please remember that DEBUG should be set to False before deploy!
+
+--
+
+About adding Bootstrap.
+
+Honestly, just use a cdn. 
+
+If you do want to add it to the project, just save the bootstrap library to css/static and add {% load staticfiles %} to the top of the file.  Then use the static template tag to build the url that links to the static files.
+
+  {% load staticfiles %}
+  <link href="{% static "css/bootstrap.css" %}" rel="stylesheet"/>
+  
+
+Btw, no need to explicitely write the directory because the static tag will use the dirs stated in the settings.py file.
+

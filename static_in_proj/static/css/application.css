@@ -1,0 +1,23 @@
+/*
+light-green: #defeec;
+mid-green: #008037;
+dark-green: #005f2d;
+*/
+
+body {
+	background-color: #defeec;
+}
+
+div.footer {
+	padding: 2em 4em;
+	border-top: 1px solid #005f2d;
+	margin-top: 1em;	
+}
+
+/* Increase width of bs container for xl screens*/
+@media (min-width: 1200px) {
+	.container {
+	    max-width: 1290px;
+	}
+}
+

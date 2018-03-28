@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  Home -
+{% endblock %}
+
+{% block stylesheets %}
+  <link href="{% static "css/home.css" %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+
+<div class='container'>
+	<div class="intro">
+	  <div class="row align-items-center justify-content-around">
+
+	    <div class="col-12 col-md-4 intro-greeting">
+	    	<strong><h2>In vehicula vulputate viverra.</h2></strong>
+	    	</br>
+	    	<p>
+	    		Praesent vel quam sit amet nisi placerat feugiat. Sed et tellus ut nulla porttitor iaculis vitae a metus. Mauris sed velit nibh. In efficitur rutrum dictum. Morbi placerat turpis nec vulputate volutpat. Ut quis fringilla nisi. 
+				</p>
+				<p>
+	    		Vivamus bibendum consectetur porttitor. Sed commodo aliquet nisl, ut vestibulum lacus faucibus vel.
+	   		</p>
+	    </div>
+
+	    <div class="col-12 col-md-7 intro-media">
+				<a class= "intro-image" href="#"><img src="http://via.placeholder.com/800x450" class='img-fluid'></a>
+	    </div>
+	  </div>		
+	</div>
+
+	<div class="link-suggestions">
+	  <div class="row justify-content-around">	
+	    <div class="col-12 col-md offset-lg-4 suggestion-item" style="background-color: cyan">
+	      <h2>Experience</h2>
+	      <p>View Our Projects</p>
+	    </div>
+	    <div class="col-12 col-md suggestion-item" style="background-color: red">
+	      <h2>Services</h2>
+	      <p>Explore our Services</p>
+	    </div>
+	    <div class="col-12 col-md suggestion-item" style="background-color: purple">
+	      <h2>About</h2>
+	      <p>Learn About Us</p>	      
+	    </div>	    
+	  </div>			
+	</div>
+</div>
+
+	<div class="featured-projects">
+		<div class="container">
+		  <div class="row justify-content-around">
+		    <div class="filters col-12 col-lg-3">
+		      <h4>Choose an industry to view recent objects</h4>
+		      <ul class="industry-list">	      	
+			      <li><a href="#">Commercial</a></li>
+			      <li><a href="#">Education</a></li>
+			      <li><a href="#">Financial</a></li>
+			      <li><a href="#">Generation</a></li>
+			      <li><a href="#">Government</a></li>
+			      <li><a href="#">Health Care</a></li>
+			      <li><a href="#">Industry</a></li>
+			      <li><a href="#">Oil and Gas</a></li>
+			      <li><a href="#">Transportation</a></li>
+			      <li><a href="#">Utilities</a></li>
+		      </ul>
+		    </div>
+		    <div class="projects col-12 col-lg-9 col-xl-8">
+      		<div class="mobile-projects-title">
+      			<h4>Featured Projects</h4>
+      		</div>
+		      <div class="insert-projects row justify-content-around">
+		      		<!-- Note; add col-lg-11 to amplify a image -->
+		      		{% for i in loop_times %}
+		      			{% include 'home/_home-project.html' %}
+		      		{% endfor %}  
+		      </div>
+		    </div>
+		  </div>			
+		</div>
+	</div>	
+
+{% endblock %}

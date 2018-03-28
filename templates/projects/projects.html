@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block stylesheets %}
+  <link href="{% static 'css/projects.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+  Projects -
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="project-toolbar">
+		<h2>Projects</h2>
+		<div class="row align-items-center">
+			<div class="col-12 col-lg-4 order-lg-2">
+				<div class="row justify-content-around">					
+					<div class="col-12 col-md-6 col-lg-12 toolbar-help">
+						<p>Filter projects by toggling industries, or search by keyword, name or location.</p>
+					</div>
+					<div class="col-12 col-md-6 col-lg-12 toolbar-search">
+						<form>
+							<div class="input-group mb-3">
+							  <input type="text" class="form-control" placeholder="Search Projects" aria-label="Search Projects">
+							  <div class="input-group-append">
+							    <button class="btn btn-outline-secondary" type="button">Search</button>
+							  </div>
+							</div>  
+						</form>				
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-lg-8">
+				<div class="row justify-content-around">	
+		      		{% for ind in industries %}
+		      			{% include 'projects/_industry-btns.html' with industry=ind %}
+		      		{% endfor %}  											
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="project-list">
+		<div class="row justify-content-around">
+	  		{% for obj in projects %}
+	  			{% include 'projects/_project-preview.html' with project=obj %}
+	  		{% endfor %}  		
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,120 @@
+/*
+light-green: #defeec;
+mid-green: #008037;
+dark-green: #005f2d;
+*/
+
+.intro {
+	/*margin: 0 40px;*/
+	padding-top: 1em;
+}
+
+a.intro-image > img {
+	width: 100%;
+}
+
+.link-suggestions {
+	padding: 1em;
+}
+
+.suggestion-item {
+	padding: 0.5em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.featured-projects {
+	padding: 1em 2em;
+	background-color: #008037;
+}
+
+/*Only on desktop*/
+.filters {
+	padding: 2em 2em;
+	display: none;
+	background-color: #005f2d;
+	color: #defeec;
+}
+
+.industry-list {
+	list-style: none;
+	padding: 0;
+}
+
+.industry-list > li > a {
+	font-size: 1.35em;
+	color: #defeec;
+	font-weight: bold;
+}
+
+.project {
+	padding: 0;
+	margin-bottom: 1em;
+}
+
+.project-img {
+	width: 100%;
+}
+
+/* On mobile, container must lose the position: absolute*/
+.project-details-container {
+	width: 100%;
+}
+
+/*On mobile, details must change to 100%*/
+.project-details {
+	padding: 1em 2em;
+	background-color: white;
+	width: 100%;
+}
+
+.project-details > p {
+	margin-bottom: 0em;
+}
+
+.project-meta-tags {
+	position: absolute;
+}
+
+.mobile-projects-title {
+	padding: 1em 2em;
+	color: #defeec;
+}
+
+
+/* Media queries for desktop style */
+@media screen and (min-width: 768px) {
+
+	.filters {
+		display: block;
+	}
+
+	.filters > ul > li {
+		float: left;
+	    width: 30%;
+	    font-size: 0.8em;
+	    margin-right: 3%;
+	}
+
+}
+
+@media screen and (min-width: 992px) {
+
+	.filters > ul > li {
+		float: none;
+		/*font-size: 1em;*/
+	}
+
+	.project {
+		margin-top: 3em;
+	}
+
+	.project-details-container {
+		position: absolute;
+		top: -3em;
+	}
+
+	.project-details {
+		width: 85%;
+	}	
+}
