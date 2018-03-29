@@ -74,13 +74,7 @@
       		<div class="mobile-projects-title">
       			<h4>Featured Projects</h4>
       		</div>
-		      <div class="insert-projects row justify-content-around">
-		      		<!-- Note; add col-lg-11 to amplify a image -->
-		      		{% for i in loop_times %}
-		      			{% include 'home/_home-project.html' %}
-		      		{% endfor %}  
-		      </div>
-		      <div id="HomeProjects" class="insert-projects row justify-content-around">
+		      <div id="HomeProjects">
 				{% render_bundle 'vendors' %}
 				{% render_bundle 'Home' %}
 		      </div>		      

@@ -9,6 +9,7 @@ config.devtool = "#eval-source-map"
 
 config.entry = {
   Home: [
+    'babel-polyfill',
     'webpack-dev-server/client?http://' + ip + ':3000',
     'webpack/hot/only-dev-server',
     './reactjs/Home',

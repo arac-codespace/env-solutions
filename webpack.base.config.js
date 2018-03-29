@@ -6,7 +6,7 @@ module.exports = {
 
   entry: {
     // Add as many entry points as you have container-react-components here
-    App1: './reactjs/Home',
+    Home: ['babel-polyfill', './reactjs/Home'],
     vendors: ['react'],
   },
 

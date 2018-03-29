@@ -324,3 +324,7 @@ Oh boy, where do I even begin?  Just visit: https://github.com/mbrochh/django-re
 Visit the following site if you're having same origin access issues : https://github.com/gaearon/react-hot-loader/issues/56
 
 react-router implementation is not covered in the above tutorial.  That's something I'll have to get my teeth in once I have a semblance of understanding as to how react works...
+
+Other references...
+https://www.techiediaries.com/django-react-rest/
+https://wsvincent.com/django-rest-framework-react-tutorial/

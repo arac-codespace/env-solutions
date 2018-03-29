@@ -1,3 +1,7 @@
 Django==2.0.3
 django-webpack-loader==0.6.0
-Fabric == 1.14.0
+Fabric==1.14.0
+djangorestframework==3.7.7
+markdown==2.6.11 #for drf browsable API
+django-filter==1.1.0 #for drf filtering
+django-cors-headers==2.2.0 #deals with cors issues
