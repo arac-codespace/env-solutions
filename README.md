@@ -21,4 +21,4 @@ Backend
 Django > webpack-loader > djangorestframework > fabric (deployment bundling, not yet tested)
 
 Front-End
-React > webpack-dev-server(hot loading, see server.js)
+React > Radium (inline-css) > webpack-dev-server(hot loading, see server.js)

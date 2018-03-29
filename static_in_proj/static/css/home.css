@@ -47,44 +47,17 @@ a.intro-image > img {
 	font-weight: bold;
 }
 
-.project {
-	padding: 0;
-	margin-bottom: 1em;
-}
 
-.project-img {
-	width: 100%;
-}
-
-/* On mobile, container must lose the position: absolute*/
-.project-details-container {
-	width: 100%;
-}
-
-/*On mobile, details must change to 100%*/
-.project-details {
-	padding: 1em 2em;
-	background-color: white;
-	width: 100%;
-}
-
-.project-details > p {
-	margin-bottom: 0em;
-}
-
-.project-meta-tags {
-	position: absolute;
-}
 
 .mobile-projects-title {
-	padding: 1em 2em;
+	padding: 1em 1em;
 	color: #defeec;
+	text-align: center;
 }
 
 
 /* Media queries for desktop style */
 @media screen and (min-width: 768px) {
-
 	.filters {
 		display: block;
 	}
@@ -99,22 +72,15 @@ a.intro-image > img {
 }
 
 @media screen and (min-width: 992px) {
-
+	.mobile-projects-title {
+		display: none;
+	}
 	.filters > ul > li {
 		float: none;
 		/*font-size: 1em;*/
 	}
 
-	.project {
-		margin-top: 3em;
+	.filters {
+		margin: -1em 0;
 	}
-
-	.project-details-container {
-		position: absolute;
-		top: -3em;
-	}
-
-	.project-details {
-		width: 85%;
-	}	
 }
