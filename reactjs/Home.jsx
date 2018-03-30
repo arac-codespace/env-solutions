@@ -1,10 +1,8 @@
 import React from "react"
 import { render } from "react-dom"
+import {StyleRoot} from 'radium';
 
 import HomeProjects from "./containers/HomeProjects"
-
-// Required for media queries
-import {StyleRoot} from 'radium';
 
 class Home extends React.Component {
   render() {

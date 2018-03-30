@@ -5,6 +5,7 @@ from . import models
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            'id',
             'title',
             'location',
             'industry',
