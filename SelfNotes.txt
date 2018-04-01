@@ -43,6 +43,19 @@ if form.is_valid():
     form.save()
 
 Passing info through the ModelForm will use the associated field validations that instantiating a simple model wouldn't.  This way, there's no need to mess with the models' save or validation methods when populating data and whatnot.
+
+
+Useful commands...
+from projects.models import Project
+
+Project.objects.all()
+Project.objects.filter(id=1)  #can use (p)rimary(k)ey for id_exact sugar
+Project.objects.filter(id=1).get().attribute
+# if the field has a relationship with another model do
+Project.objects.filter(id=1).get().attribute.select_related()
+# The above will retrieve the related object so then do...
+Projects.objects.filter(id=1).get().attribute.select_related().get().attribute or method
+
 --
 
 About validation.

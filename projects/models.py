@@ -51,3 +51,7 @@ class Project(models.Model):
         if not self.slug:
             self.slug = self._get_slug()
         super().save()
+
+    def get_industry(self):
+        industry = self.industry.select_related().get().name
+        return industry

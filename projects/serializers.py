@@ -8,7 +8,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'location',
-            'industry',
+            'get_industry',
             'client',
             'description',
         )

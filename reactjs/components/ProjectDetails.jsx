@@ -1,6 +1,16 @@
 import React from "react"
 import Radium from "radium"
+import Icon from '../assets/imgs/industrial.svg'
 
+import {Style} from "radium"
+import GetIndustryImg from "./GetIndustryImg"
+
+/*
+light-green: #defeec
+lime-green: #22cf6d
+mid-green: #008037
+dark-green: #005f2d
+*/
 const styles = {
 
   // On mobile, container must lose the position: absolute
@@ -27,6 +37,8 @@ const styles = {
   },
   projectMetaTags: {
     position: 'absolute',
+    backgroundColor:'#22cf6d',
+    padding: '0.4em'
   },
   project: {
     padding: '0',
@@ -36,7 +48,7 @@ const styles = {
     }
   },
   projectImg: {
-    width: '100%',
+    width: '100%'
   },  
 }
 
@@ -45,21 +57,30 @@ export default class ProjectDetails extends React.Component {
   render() {
   	let {details} = this.props
     return (
-    	<div className="row justify-content-around">
+    	<div className="row justify-content-around">    
 	    	{details.map(item => (
 		    	<div key={item.id} className="col-12 col-md-5" style={[styles.project]}>
 					  <div className="projectDetailsContainer" style={[styles.projectDetailsContainer]}>
 							<div className="projectDetails" style={[styles.projectDetails]}>
 								<h6>{item.title}</h6>
-								<p style={styles.projectDetailsLocation}>{item.location}</p>
+								<p style={styles.projectDetailsLocation}>{item.client}</p>
 							</div>
 				      <div className = 'projectMetaTags' style={[styles.projectMetaTags]}>
-				        <a href="#"><img src="http://via.placeholder.com/45x45/00ffff" className='img-fluid'></img></a>
+                <a href="#"><GetIndustryImg iconName={item.get_industry} style={{height:"2em"}}className="imgSvg"/></a>                
 				      </div>
 				    </div>
 				  	<a href="#"><img src="http://via.placeholder.com/800x600" className='img-fluid' style={[styles.projectImg]}></img></a>
 			    </div>
 	    	))}
+        <Style
+          scopeSelector=".imgSvg"
+          rules={{
+            polygon: {fill:'white !important'},
+            path: {
+              fill: 'white !important'
+            }
+          }}
+        />          
 	    </div>
     )
   }
