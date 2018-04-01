@@ -2,10 +2,6 @@ import React from "react"
 
 import ProjectDetails from "../components/ProjectDetails"
 
-import Radium from "radium"
-
-
-@Radium
 export default class HomeProjects extends React.Component {
 
   state={

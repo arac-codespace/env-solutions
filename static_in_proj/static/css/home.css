@@ -24,37 +24,26 @@ a.intro-image > img {
 }
 
 .featured-projects {
-	padding: 1em 2em;
+	padding: 1em;
 	background-color: #008037;
 }
 
 /*Only on desktop*/
 .filters {
-	padding: 2em 2em;
+	padding: 1em;
 	display: none;
 	background-color: #005f2d;
-	color: #defeec;
-}
-
-.industry-list {
-	list-style: none;
-	padding: 0;
-}
-
-.industry-list > li > a {
-	font-size: 1.35em;
-	color: #defeec;
-	font-weight: bold;
+	color: white;
+	text-align: center;
 }
 
 
 
 .mobile-projects-title {
 	padding: 1em 1em;
-	color: #defeec;
+	color: white;
 	text-align: center;
 }
-
 
 /* Media queries for desktop style */
 @media screen and (min-width: 768px) {
@@ -62,22 +51,12 @@ a.intro-image > img {
 		display: block;
 	}
 
-	.filters > ul > li {
-		float: left;
-	    width: 30%;
-	    font-size: 0.8em;
-	    margin-right: 3%;
-	}
 
 }
 
 @media screen and (min-width: 992px) {
 	.mobile-projects-title {
 		display: none;
-	}
-	.filters > ul > li {
-		float: none;
-		/*font-size: 1em;*/
 	}
 
 	.filters {
