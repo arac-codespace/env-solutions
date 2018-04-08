@@ -52,8 +52,10 @@
 	</div>
 </div>
 
-	<div class="featured-projects">
-		<div class="container">
+	<div id="FeaturedProjects" class="featured-projects">
+		{% render_bundle 'vendors' %}
+		{% render_bundle 'Home' %}
+		<!-- <div class="container">
 		  <div class="row justify-content-around">
 		    <div class="filters col-12 col-lg-3">
 		      <h4>Choose an industry to view recent projects</h4>
@@ -64,12 +66,10 @@
       			<h4>Featured Projects</h4>
       		</div>
 		      <div id="HomeProjects">
-				{% render_bundle 'vendors' %}
-				{% render_bundle 'Home' %}
 		      </div>		      
 		    </div>
 		  </div>			
-		</div>
+		</div> -->
 	</div>	
 
 {% endblock %}

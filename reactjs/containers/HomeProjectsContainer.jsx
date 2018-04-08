@@ -1,8 +1,8 @@
 import React from "react"
-
 import ProjectDetails from "../components/ProjectDetails"
+import HomeProjects from "../components/HomeProjects"
 
-export default class HomeProjects extends React.Component {
+export default class HomeProjectsContainer extends React.Component {
 
   state={
     projects:[]
@@ -22,7 +22,8 @@ export default class HomeProjects extends React.Component {
 
   render() {
     return (
-      <ProjectDetails details={this.state.projects}></ProjectDetails>
+        // <ProjectDetails details={this.state.projects}></ProjectDetails>
+        <HomeProjects details={this.state.projects}/>
     )
   }
 }

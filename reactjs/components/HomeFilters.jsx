@@ -1,6 +1,5 @@
 import React from "react"
-import Radium from "radium"
-import {Style} from "radium"
+import Radium, {Style} from "radium"
 import GetIndustryImg from "../components/GetIndustryImg"
 
 const styles = {
@@ -45,6 +44,7 @@ const styles = {
 export default class HomeProjects extends React.Component {
 
 	render() {
+
 		const industries = ['Commercial', 
 							'Education', 
 							'Financial',
@@ -65,17 +65,17 @@ export default class HomeProjects extends React.Component {
                         );
                       })
 		return ( 
-				<div className="row justify-content-around">{ industryList }
-			        <Style
-			          scopeSelector=".imgSvg"
-			          rules={{
-			            polygon: {fill:'white !important'},
-			            path: {
-			              fill: 'white !important'
-			            }
-			          }}
-			        />  				
-				</div>
+			<div className="row justify-content-around">{ industryList }
+		        <Style
+		          scopeSelector=".imgSvg"
+		          rules={{
+		            polygon: {fill:'white !important'},
+		            path: {
+		              fill: 'white !important'
+		            }
+		          }}
+		        />  				
+			</div>
 		)
 	}
 }

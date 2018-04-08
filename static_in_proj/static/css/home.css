@@ -27,39 +27,3 @@ a.intro-image > img {
 	padding: 1em;
 	background-color: #008037;
 }
-
-/*Only on desktop*/
-.filters {
-	padding: 1em;
-	display: none;
-	background-color: #005f2d;
-	color: white;
-	text-align: center;
-}
-
-
-
-.mobile-projects-title {
-	padding: 1em 1em;
-	color: white;
-	text-align: center;
-}
-
-/* Media queries for desktop style */
-@media screen and (min-width: 768px) {
-	.filters {
-		display: block;
-	}
-
-
-}
-
-@media screen and (min-width: 992px) {
-	.mobile-projects-title {
-		display: none;
-	}
-
-	.filters {
-		margin: -1em 0;
-	}
-}

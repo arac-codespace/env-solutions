@@ -1,7 +1,6 @@
 import React from "react"
-import Radium from "radium"
+import Radium, {Style} from "radium"
 
-import {Style} from "radium"
 import GetIndustryImg from "./GetIndustryImg"
 
 /*

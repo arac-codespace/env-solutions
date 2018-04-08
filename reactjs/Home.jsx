@@ -2,30 +2,16 @@ import React from "react"
 import { render } from "react-dom"
 import {StyleRoot} from 'radium';
 
-import HomeProjects from "./containers/HomeProjects"
-import HomeFilters from "./containers/HomeFilters"
+import HomeProjectsContainer from "./containers/HomeProjectsContainer"
 
-
-class Projects extends React.Component {
-  render() {
-    return (
-    	<StyleRoot>
-      		<HomeProjects/>
-      	</StyleRoot>
-    )
-  }
-}
-
-class Filters extends React.Component {
+class Home extends React.Component {
 	render() {
 		return (
 			<StyleRoot>
-				<HomeFilters/>
+				<HomeProjectsContainer/>
 			</StyleRoot>
-
 		)
 	}
 }
 
-render(<Projects/>, document.getElementById('HomeProjects'))
-render(<Filters/>, document.getElementById('HomeFilters'))
+render(<Home/>, document.getElementById("FeaturedProjects"));
