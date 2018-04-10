@@ -32,7 +32,10 @@ const styles = {
 @Radium
 export default class HomeProjects extends React.Component {
 	render() {
-	  	let {details} = this.props
+	  	let details = this.props.details
+	  	let onClick = this.props.onClick
+	  	let filterValue = this.props.filterValue
+	  	let industries = this.props.industries
 
 		return(
 			<div className="featuredProjects">
@@ -40,13 +43,13 @@ export default class HomeProjects extends React.Component {
 					<div className="row justify-content-around">
 						<div className="filters col-12 col-lg-3" style={[styles.filters]}>
 							<h4>Choose an industry to view recent projects</h4>
-								<HomeFilters details={details} />
+								<HomeFilters onClick={onClick} industries = {industries} filterValue = {filterValue}/>
 						</div>
 						<div className="projects col-12 col-lg-9 col-xl-8">
 				      		<div style={[styles.mobileProjectTitle]}>
 				      			<h4>Featured Projects</h4>
 				      		</div>						
-							<ProjectDetails details={details}/>
+							<ProjectDetails details={details} filterValue = {filterValue}/>
 						</div>
 					</div>
 				</div>

@@ -31,3 +31,18 @@ class ApiBrowse(generics.ListCreateAPIView):
 class ApiInfo(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Project.objects.all()
     serializer_class = serializers.ProjectSerializer
+
+
+class IndustryFilter(generics.ListAPIView):
+    serializer_class = serializers.ProjectSerializer
+
+    def get_queryset(self):
+        industry = self.kwargs['industry_name']
+
+        """
+        First look for industry_name id, then use the id to filter projects
+        """
+        industry_id = models.Industry.objects.filter(name=industry).get().id
+        queryset = models.Project.objects.filter(industry=industry_id)
+        # return models.Project.objects.filter(industry=industry)
+        return queryset

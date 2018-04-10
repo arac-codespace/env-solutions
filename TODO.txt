@@ -1,0 +1,12 @@
+TODOS
+
+Add featured boolean.  In react, check for boolean and filter results accordingly.
+
+In the API, sort results by date or name...
+
+In the filters component, decrease transparency according to filterValue.
+
+In projects component, increase the img size of one of the projects if number of projects is odd... ~optional~
+
+In projects component, limit number of projects that can be displayed at once.
+

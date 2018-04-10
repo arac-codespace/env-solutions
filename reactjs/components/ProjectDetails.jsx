@@ -48,12 +48,24 @@ const styles = {
   projectImg: {
     width: '100%'
   },  
+  anchor: {
+    color: 'white'
+  }
 }
 
 @Radium
 export default class ProjectDetails extends React.Component {
   render() {
-  	let {details} = this.props
+  	let details = this.props.details;
+    let filterValue = this.props.filterValue;
+
+    if (filterValue) {
+      // Filter keeps records that return true!      
+      const isIndustry = (item) => item.get_industry === filterValue;
+      (filterValue === "Featured") ? details : details = details.filter(isIndustry)
+      // details = details.filter(isIndustry);      
+    }
+
     return (
     	<div className="row justify-content-around">    
 	    	{details.map(item => (
@@ -64,21 +76,12 @@ export default class ProjectDetails extends React.Component {
 								<p style={styles.projectDetailsLocation}>{item.client}</p>
 							</div>
 				      <div className = 'projectMetaTags' style={[styles.projectMetaTags]}>
-                <a href="#"><GetIndustryImg iconName={item.get_industry} style={{height:"2em"}}className="imgSvg"/></a>                
+                <a href="#" style={[styles.anchor]}><GetIndustryImg iconName={item.get_industry} style={{height:"2em", fill:'currentColor'}} className="imgSvg"/></a>                
 				      </div>
 				    </div>
 				  	<a href="#"><img src="http://via.placeholder.com/800x600" className='img-fluid' style={[styles.projectImg]}></img></a>
 			    </div>
-	    	))}
-        <Style
-          scopeSelector=".imgSvg"
-          rules={{
-            polygon: {fill:'white !important'},
-            path: {
-              fill: 'white !important'
-            }
-          }}
-        />          
+	    	))}         
 	    </div>
     )
   }

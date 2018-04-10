@@ -13,6 +13,10 @@ const styles = {
 	    padding: '0.5em 0.8em',
 	    color: 	'white',
 	    cursor: 'pointer',
+	    border: 'none',
+	    ':focus': {
+	    	outline: '5px auto transparent'
+	    },
 	    ':hover': {
 	    	backgroundColor: '#008037'
 	    },
@@ -37,44 +41,27 @@ const styles = {
 	    '@media screen and (min-width: 768px)':{
 	    	fontSize: '1em'
 		},		    	
+  	},
+  	inactive: {
+  		color: '#ffffff5e'
   	}
 }
+
 
 @Radium
 export default class HomeProjects extends React.Component {
 
 	render() {
-
-		const industries = ['Commercial', 
-							'Education', 
-							'Financial',
-							'Generation',
-							'Government',
-							'Health Care',
-							'Industrial',
-							'Oil and Gas',
-							'Transportation',
-							'Utilities']
-
-        var industryList = industries.map(function(item, index){
-                        return (
-	                        <div key={"Home_" + item + "_" + index} className="col-4 col-md-3" style={[styles.industry]}>
-	                        	<span style={[styles.spanStyle]}>{item}</span>
-	                        	<GetIndustryImg iconName={item} style={{height:"1.5em", marginLeft: "1em", float:'right'}} className="imgSvg"/>
-	                        </div>
-                        );
-                      })
+		const onClickFilter = this.props.onClick;
 		return ( 
-			<div className="row justify-content-around">{ industryList }
-		        <Style
-		          scopeSelector=".imgSvg"
-		          rules={{
-		            polygon: {fill:'white !important'},
-		            path: {
-		              fill: 'white !important'
-		            }
-		          }}
-		        />  				
+			<div className="row justify-content-around">
+				{this.props.industries.map( (item,index) => (
+	                <button onClick= {()=> {onClickFilter(item)}} key={"Home_" + item + "_" + index} className="col-4 col-md-3" style={[styles.industry, this.props.filterValue !== item ? styles.inactive:null ]}>
+	                	<span style={[styles.spanStyle]}>{item}</span>
+	                	<GetIndustryImg iconName={item} style={{height:"1.5em", marginLeft: "1em", float:'right', fill:'currentColor'}} className="imgSvg"/>
+	                </button>
+				))}
+				
 			</div>
 		)
 	}
