@@ -59,11 +59,16 @@ export default class ProjectDetails extends React.Component {
   	let details = this.props.details;
     let filterValue = this.props.filterValue;
 
+    // Filters by industry
     if (filterValue) {
       // Filter keeps records that return true!      
       const isIndustry = (item) => item.get_industry === filterValue;
       (filterValue === "Featured") ? details : details = details.filter(isIndustry)
-      // details = details.filter(isIndustry);      
+    }
+
+    // Limits number of projects that can be displayed at any one time
+    if (details.length > 2) {
+      details = details.slice(0,6)
     }
 
     return (

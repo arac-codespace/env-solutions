@@ -24,7 +24,7 @@ def projects(request):
 
 
 class ApiBrowse(generics.ListCreateAPIView):
-    queryset = models.Project.objects.all()
+    queryset = models.Project.objects.all().order_by('-created_at')
     serializer_class = serializers.ProjectSerializer
 
 
