@@ -24,12 +24,16 @@ export default class HomeProjectsContainer extends React.Component {
     this.state = {
       projects: [],
       filterValue: "Featured",
-      industries: industries
+      industries: industries,
+      width: window.innerWidth
     };
     this.onClickFilter = this.onClickFilter.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
   };
 
+  // https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
   async componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);    
     try {
       const res = await fetch('/projects/api/');
       const projects = await res.json();
@@ -41,17 +45,25 @@ export default class HomeProjectsContainer extends React.Component {
     }
   }
 
+  // Triggered by resize event.  Changes filterValue when size is below
+  // x pixels
+  updateDimensions() {
+      let windowWith = window.innerWidth
+      let filterValue = this.state.filterValue
+      this.setState({
+        width: windowWith,
+        filterValue: (windowWith<768)?"Featured":filterValue
+      });
+  }
+
   onClickFilter(industry) {
     // Change filterValue for project filtering in ProjectDetails component
     // Filter value also used for styling in home filters...
-    console.log('Filter value = ' + this.state.filterValue)
-    console.log(industry)
     this.setState({filterValue: industry})
   }  
 
   render() {
     return (
-        // <ProjectDetails details={this.state.projects}></ProjectDetails>
         <HomeProjects details={this.state.projects} onClick={this.onClickFilter} filterValue={this.state.filterValue} industries={this.state.industries}/>
     )
   }

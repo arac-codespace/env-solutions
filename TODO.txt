@@ -1,6 +1,6 @@
 TODOS
 
-Add featured boolean.  In react, check for boolean and filter results accordingly.
+Add featured boolean.  In react, check for boolean and filter results accordingly. -- Done
 
 Some considerations... If I want a featured filter, I'd have to make a query for featured projects. 
 

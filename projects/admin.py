@@ -12,7 +12,7 @@ from .models import Project, Industry
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['id', '__str__', 'location',
+    list_display = ['id', '__str__', 'location', 'isFeatured',
                     'created_at', 'updated']
 
     # Point to a ModelForm for custom administration forms...

@@ -25,6 +25,7 @@ class Project(models.Model):
     location = models.CharField(max_length=120)
     industry = models.ManyToManyField(Industry)
     client = models.CharField(max_length=120)
+    isFeatured = models.BooleanField(default=False)
     description = models.TextField()
     # ADD gallery?
     # default SlufField max_length = 50

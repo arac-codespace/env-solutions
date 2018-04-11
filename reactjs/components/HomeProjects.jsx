@@ -15,15 +15,21 @@ const styles = {
 	      display: "block",
 	    },      
 	    '@media screen and (min-width: 992px)':{
-			margin: '-1em 0'
-	    }         
+			margin: '-1em 0',
+	    },
+	    '@media screen and (min-width: 1200px)':{
+	    	minWidth: '28%'
+	    }
+	},
+	projects: {
+		marginTop: '30px'
 	},
 	mobileProjectTitle: {
 		padding: '1em',
 		color: 'white',
 		textAlign: 'center',		
 	    display: 'block', 
-	    '@media screen and (min-width: 992px)':{
+	    '@media screen and (min-width: 768px)':{
 			display: 'none'
 	    }         
 	}	
@@ -45,7 +51,7 @@ export default class HomeProjects extends React.Component {
 							<h4>Choose an industry to view recent projects</h4>
 								<HomeFilters onClick={onClick} industries = {industries} filterValue = {filterValue}/>
 						</div>
-						<div className="projects col-12 col-lg-9 col-xl-8">
+						<div className="projects col-12 col-lg-9 col-xl-8" style={[styles.projects]}>
 				      		<div style={[styles.mobileProjectTitle]}>
 				      			<h4>Featured Projects</h4>
 				      		</div>						

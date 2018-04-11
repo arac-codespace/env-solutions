@@ -30,6 +30,8 @@ Migrate: python manage.py makemigrations || ... ... migrate
 Shell: python manage.py shell
 Create app: python manage.py startapp *appname* 
 
+Btw, to start webpack server do: node server.js
+
 --
 
 About the django shell.
