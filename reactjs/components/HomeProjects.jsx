@@ -3,6 +3,7 @@ import Radium, {StyleRoot} from 'radium';
 
 import HomeFilters from "./HomeFilters"
 import ProjectDetails from "./ProjectDetails"
+import {Transition} from "react-transition-group";
 
 const styles = {
 	filters: {
