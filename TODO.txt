@@ -19,3 +19,11 @@ In projects component, increase the img size of one of the projects if number of
 
 In projects component, limit number of projects that can be displayed at once. -- Done
 
+---
+
+Add mount/unmount animations...
+
+Clean up package.json's dependencies
+
+
+

@@ -6,3 +6,4 @@ markdown==2.6.11 #for drf browsable API
 django-filter==1.1.0 #for drf filtering
 django-cors-headers==2.2.0 #deals with cors issues
 svg-react-loader==0.4.5 #webpack loader for importing and using inline svgs
+react-transition-group@2.3.0 #for mount/unmount animations
