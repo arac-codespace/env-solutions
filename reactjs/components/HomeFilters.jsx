@@ -66,7 +66,7 @@ export default class HomeProjects extends React.Component {
 					// Apply inactive style to all items except the btn that matches current filterValue
 	                <button onClick= {()=> {onClickFilter(item)}} key={"Home_" + item + "_" + index} className="col-4 col-md-3" style={[styles.industry, this.props.filterValue !== item ? styles.inactive:null ]}>
 	                	<span style={[styles.spanStyle]}>{item}</span>
-	                	<GetIndustryImg iconName={item} style={{height:"1.5em", marginLeft: "1em", float:'right', fill:'currentColor'}} className="imgSvg"/>
+	                	<GetIndustryImg iconname={item} style={{height:"1.5em", marginLeft: "1em", float:'right', fill:'currentColor'}} className="imgSvg"/>
 	                </button>
 				))}
 				

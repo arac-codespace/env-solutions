@@ -2,6 +2,7 @@ import React from "react"
 import Radium, {Style} from "radium"
 
 import GetIndustryImg from "./GetIndustryImg"
+import { CSSTransition, TransitionGroup } from 'react-transition-group' // ES6
 
 /*
 light-green: #defeec
@@ -75,10 +76,14 @@ const styles = {
 
 @Radium
 export default class ProjectDetails extends React.Component {
+
+  getImage(item){
+    return <GetIndustryImg iconname={item.get_industry} style={{height:"2em", fill:'currentColor'}} className="imgSvg"/>
+  }
   render() {
   	let details = this.props.details;
     let filterValue = this.props.filterValue;
-
+    console.log("ProjectDetails render fired!")
     // Filters by industry
     if (filterValue && filterValue !== "Featured") {
       // Filter keeps records that return true!      
@@ -100,24 +105,23 @@ export default class ProjectDetails extends React.Component {
     
 
     return (
-    	<div className="row justify-content-around">    
-	    	{details.map((item,index) => (
-          // Ternary operator for enlargin first odd image only
-		    	<div key={item.id} className={"col-12" + (index==0 ? classNameOdd:classNameEven)} style={[styles.project]}>
-					  <div className="projectDetailsContainer" style={[styles.projectDetailsContainer]}>
-							<div className="projectDetails" style={[styles.projectDetails]}>
-								<h4>{item.title}</h4>
-								<p style={styles.projectDetailsLocation}>{item.client}</p>
-							</div>
-				      <div className = 'projectMetaTags' style={[styles.projectMetaTags]}>
-                  <a style={[styles.metaImgContainer]} href="#"><GetIndustryImg iconName={item.get_industry} style={{height:"2em", fill:'currentColor'}} className="imgSvg"/></a>                
-				          <span style={[styles.metaLocationContainer]}>{item.location}</span>
-              </div>
-				    </div>
-				  	<a href="#"><img src="http://via.placeholder.com/800x600" className='img-fluid' style={[styles.projectImg]}></img></a>
-			    </div>
-	    	))}         
-	    </div>
+        <div className="row justify-content-around">
+          {details.map((item,index) => (              
+  		    	<div key={item.id} className={"col-12" + (index==0 ? classNameOdd:classNameEven)} style={[styles.project]}>
+  					  <div className="projectDetailsContainer" style={[styles.projectDetailsContainer]}>
+  							<div className="projectDetails" style={[styles.projectDetails]}>
+  								<h4>{item.title}</h4>
+  								<p style={styles.projectDetailsLocation}>{item.client}</p>
+  							</div>
+  				      <div className = 'projectMetaTags' style={[styles.projectMetaTags]}>
+                    <a style={[styles.metaImgContainer]} href="#">{this.getImage(item)}</a>                
+  				          <span style={[styles.metaLocationContainer]}>{item.location}</span>
+                </div>
+  				    </div>
+  				  	<a href="#"><img src="http://via.placeholder.com/800x600" className='img-fluid' style={[styles.projectImg]}></img></a>
+  			    </div>
+          ))}         
+        </div>
     )
   }
 }

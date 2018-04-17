@@ -3,7 +3,7 @@ import Radium, {StyleRoot} from 'radium';
 
 import HomeFilters from "./HomeFilters"
 import ProjectDetails from "./ProjectDetails"
-import {Transition} from "react-transition-group";
+import { CSSTransition, TransitionGroup } from 'react-transition-group' // ES6
 
 const styles = {
 	filters: {
@@ -43,6 +43,10 @@ export default class HomeProjects extends React.Component {
 	  	let onClick = this.props.onClick
 	  	let filterValue = this.props.filterValue
 	  	let industries = this.props.industries
+	  	let projectsTransition = this.props.projectsTransition
+	  	const toggleTransition = this.props.toggleTransition
+
+	  	console.log("HomeProjects transition = " + toggleTransition)
 
 		return(
 			<div className="featuredProjects">
@@ -50,13 +54,27 @@ export default class HomeProjects extends React.Component {
 					<div className="row justify-content-around">
 						<div className="filters col-12 col-lg-3" style={[styles.filters]}>
 							<h4>Choose an industry to view recent projects</h4>
-								<HomeFilters onClick={onClick} industries = {industries} filterValue = {filterValue}/>
+							<HomeFilters onClick={onClick} industries = {industries} filterValue = {filterValue}/>
 						</div>
 						<div className="projects col-12 col-lg-9 col-xl-8" style={[styles.projects]}>
 				      		<div style={[styles.mobileProjectTitle]}>
 				      			<h4>Featured Projects</h4>
-				      		</div>						
-							<ProjectDetails details={details} filterValue = {filterValue}/>
+				      		</div>
+				      		<CSSTransition
+				      		in = {projectsTransition}
+				            timeout={500}
+				            classNames="fade"
+				            appear
+				            enter
+				            exit
+				            onEntered = {(isAppearing)=>{isAppearing ? toggleTransition():console.log("error")}}
+				            unmountOnExit
+				            onExited={()=>{ 
+				            	console.log("onExit")
+				            	toggleTransition();
+				            }}>  						
+								<ProjectDetails details={details} filterValue = {filterValue}/>
+							</CSSTransition>
 						</div>
 					</div>
 				</div>
