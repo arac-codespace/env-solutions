@@ -39,7 +39,7 @@ const styles = {
 @Radium
 export default class HomeProjects extends React.Component {
 	render() {
-	  	let details = this.props.details
+	  	let projects = this.props.projects
 	  	let onClick = this.props.onClick
 	  	let filterValue = this.props.filterValue
 	  	let industries = this.props.industries
@@ -60,21 +60,7 @@ export default class HomeProjects extends React.Component {
 				      		<div style={[styles.mobileProjectTitle]}>
 				      			<h4>Featured Projects</h4>
 				      		</div>
-				      		<CSSTransition
-				      		in = {projectsTransition}
-				            timeout={500}
-				            classNames="fade"
-				            appear
-				            enter
-				            exit
-				            onEntered = {(isAppearing)=>{isAppearing ? toggleTransition():console.log("error")}}
-				            unmountOnExit
-				            onExited={()=>{ 
-				            	console.log("onExit")
-				            	toggleTransition();
-				            }}>  						
-								<ProjectDetails details={details} filterValue = {filterValue}/>
-							</CSSTransition>
+							<ProjectDetails projects={projects} filterValue = {filterValue}/>
 						</div>
 					</div>
 				</div>

@@ -29,16 +29,8 @@ a.intro-image > img {
 }
 
 
-.fade-appear {
-	opacity: 0;
-}
-.fade-appear {
-	opacity: 1;
-	transition: opacity 500ms ease-in;
-}
-
 .fade-enter {
-  opacity: 0;
+  opacity: 0.01;
 }
 .fade-enter-active {
   opacity: 1;
@@ -50,7 +42,7 @@ a.intro-image > img {
   /*max-height: 500px;*/
 }
 .fade-exit-active {
-  opacity: 0;
+  opacity: 0.01;
   /*max-height: 0;*/
   transition: opacity 500ms ease-in;
 }

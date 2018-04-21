@@ -61,8 +61,7 @@ export default class HomeProjectsContainer extends React.Component {
   onClickFilter(industry) {
     // Change filterValue for project filtering in ProjectDetails component
     // Filter value also used for styling in home filters...
-    this.setState({filterValue: industry})
-    this.setState({projectsTransition: !this.state.projectsTransition})
+    this.setState({filterValue: industry, projectsTransition: !this.state.projectsTransition})
   }  
 
   toggleTransition(){
@@ -73,7 +72,7 @@ export default class HomeProjectsContainer extends React.Component {
   render() {
     console.log("HomeProjectsContainer transition = " + this.state.projectsTransition)
     return (
-        <HomeProjects details={this.state.projects} onClick={this.onClickFilter} filterValue={this.state.filterValue} industries={this.state.industries} projectsTransition={this.state.projectsTransition} toggleTransition={this.toggleTransition}/>
+        <HomeProjects projects={this.state.projects} onClick={this.onClickFilter} filterValue={this.state.filterValue} industries={this.state.industries} projectsTransition={this.state.projectsTransition} toggleTransition={this.toggleTransition}/>
     )
   }
 }
